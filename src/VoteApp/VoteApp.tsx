@@ -224,9 +224,8 @@ export default function VoteApp(props: { disableCustomTheme?: boolean }) {
       <TabBar />
       <CssBaseline enableColorScheme />
       <MintContainer direction="column" justifyContent="space-between">
-        <Card variant="outlined" sx={{ minWidth: 1000, maxWidth: 1000 }}>
+        {/* <Card variant="outlined" sx={{ minWidth: 1000, maxWidth: 1000 }}> */}
 
-          <img src={logo} width={"50px"} height={"50px"} />
           <Typography
             component="h1"
             variant="h4"
@@ -307,7 +306,7 @@ export default function VoteApp(props: { disableCustomTheme?: boolean }) {
           )}
           {/*Samplllllleeee*/}
 
-        </Card>
+        {/* </Card> */}
 
         {/* {alert && (
           <Stack sx={{ width: "90%", alignItems: "center", bottom: "20" }} spacing={2}>

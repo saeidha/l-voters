@@ -1,6 +1,5 @@
 // ImageGenerator.tsx
 import React, { useState } from "react";
-import UploadToIPFS from "./UploadToIPFS";
 import PromptForm from "./Promp";
 import { useAccount } from "wagmi";
 // import { useProceedToPay } from "./Pay/ProceedToPay";
@@ -110,12 +109,6 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ onUriImageSet, setLoadi
       />
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {base64Image && (
-        <UploadToIPFS
-          base64Image={base64Image.split(",")[1]}
-          onUploadSuccess={onUriSetDone}
-        />
-      )}
     </div>
   );
 };
