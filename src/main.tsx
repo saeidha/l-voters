@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client'
 import { WagmiProvider } from 'wagmi'
 import '@coinbase/onchainkit/styles.css'; 
 import App from './App.tsx'
-import { config } from './MintApp/wagmi.ts'
+import { config } from './VoteApp/wagmi.ts'
 
 import './index.css'
 

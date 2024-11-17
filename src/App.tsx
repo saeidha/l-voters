@@ -1,11 +1,11 @@
 import React from 'react';
-import MintApp from './MintApp/MintApp'; // Import the LaunchApp component
+import VoteApp from './VoteApp/VoteApp'; // Import the LaunchApp component
 
 
 const App: React.FC = () => {
 
   return (
-    <MintApp />
+    <VoteApp />
   );
 };
 

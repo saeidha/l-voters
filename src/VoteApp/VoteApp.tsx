@@ -1,11 +1,11 @@
-// MintApp.tsx
+// VoteApp.tsx
 import { useState } from "react";
 import { useAccount } from "wagmi";
 import { simulateContract, writeContract } from "@wagmi/core";
 import { abi } from "../abi";
 import ImageGenerator from "./ImageGenerator";
 import TabBar from "../Tabbar/TabBar";
-import "./MintApp.css";
+import "./VoteApp.css";
 import GeneratedModal from "../Modal/GeneratedModal/GeneratedModal";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
@@ -62,7 +62,7 @@ const MintContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export default function MintApp(props: { disableCustomTheme?: boolean }) {
+export default function VoteApp(props: { disableCustomTheme?: boolean }) {
   const account = useAccount();
   // const { connectors, connect, status, error } = useConnect();
   // const { disconnect } = useDisconnect();

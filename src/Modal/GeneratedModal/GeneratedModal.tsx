@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Stack from "@mui/material/Stack";
-// import UploadToIPFS from "../../MintApp/UploadToIPFS";
+// import UploadToIPFS from "../../VoteApp/UploadToIPFS";
 import Typography from "@mui/material/Typography";
 import './GeneratedModal.css'
 import MintModal from "../MintModal/MintModal";
