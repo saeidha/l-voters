@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import "./PromptForm.css"; // Import the CSS file
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
+import { purple } from '@mui/material/colors';
 interface PromptFormProps {
   sendPrompt: () => void;
   prompt: string;
@@ -20,8 +21,8 @@ const PromptForm: React.FC<PromptFormProps> = ({
         variant="outlined"
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Enter your prompt"
-        label="Prompt"
+        placeholder="Search in proposals"
+        label="Search"
         fullWidth
         slotProps={
           {
@@ -54,9 +55,11 @@ const PromptForm: React.FC<PromptFormProps> = ({
         className="prompt-button"
         type="submit"
         variant="contained"
+        sx={{ backgroundColor: purple[800] , borderRadius: '10px' }}
+        
         onClick={sendPrompt}
       >
-        Generate Image
+        Search
       </Button>
     </Stack>
   );

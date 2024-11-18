@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useAccount } from "wagmi";
 import { simulateContract, writeContract } from "@wagmi/core";
 import { abi } from "../abi";
-import ImageGenerator from "./ImageGenerator";
 import TabBar from "../Tabbar/TabBar";
 import "./VoteApp.css";
 import GeneratedModal from "../Modal/GeneratedModal/GeneratedModal";
@@ -13,53 +12,33 @@ import Stack from "@mui/material/Stack";
 import MuiCard from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-import AppTheme from "../theme/AppTheme";
+// import AppTheme from "../theme/AppTheme";
 // import DismissibleAlert from "../DismissibleAlert";
 import logo from "../images/logo-mini.svg";
 import { config } from "./wagmi";
 import MintResult from "../Modal/MintResult/MintResult";
 import LoadingModal from "../Modal/LoadingModal/LoadingModal"
-
-const Card = styled(MuiCard)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  alignSelf: "center",
-  width: "100%",
-  padding: theme.spacing(4),
-  gap: theme.spacing(2),
-  margin: "auto",
-  [theme.breakpoints.up("sm")]: {
-    maxWidth: "450px",
-  },
-  boxShadow:
-    "hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px",
-  ...theme.applyStyles("light", {
-    boxShadow:
-      "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px",
-  }),
-}));
+import PromptForm from "./Promp";
+import { background } from "@coinbase/onchainkit/theme";
 
 const MintContainer = styled(Stack)(({ theme }) => ({
   height: "calc((1 - var(--template-frame-height, 0)) * 100dvh)",
   minHeight: "100%",
   padding: theme.spacing(2),
+  paddingTop: "5%", // Add top padding of 10%
   [theme.breakpoints.up("sm")]: {
     padding: theme.spacing(4),
+    paddingTop: "5%", // Ensure top padding is consistent on larger screens
   },
   "&::before": {
     content: '""',
     display: "block",
     position: "absolute",
     zIndex: -1,
-    inset: 0,
-    backgroundImage:
-      "radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))",
-    backgroundRepeat: "no-repeat",
-    ...theme.applyStyles("light", {
-      backgroundImage:
-        "radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))",
-    }),
+    inset: 0
   },
+  alignItems: "flex-start", // Ensure items are aligned to the start
+  justifyContent: "flex-start", // Ensure content is aligned to the top
 }));
 
 export default function VoteApp(props: { disableCustomTheme?: boolean }) {
@@ -70,6 +49,21 @@ export default function VoteApp(props: { disableCustomTheme?: boolean }) {
   // const [alert, setAlert] = useState<{ type: 'success' | 'info' | 'warning' | 'error'; message: string } | null>(null);
 
   const contractAddress = import.meta.env.VITE_CONTRACT_ADDREESS;
+
+  const [prompt, setPrompt] = useState<string>("");
+
+
+
+
+
+
+
+  const handleSubmit = () => {
+
+  }
+
+
+
   const [uri, setUri] = useState<string | null>(null);
   const [base64Image, setBase64Image] = useState<string>('');
 
@@ -220,21 +214,37 @@ export default function VoteApp(props: { disableCustomTheme?: boolean }) {
   }
 
   return (
-    <AppTheme {...props}>
+    // <AppTheme {...props}>
+    <div>
       <TabBar />
       <CssBaseline enableColorScheme />
-      <MintContainer direction="column" justifyContent="space-between">
+      <MintContainer direction="column" justifyContent="flex-start" >
         {/* <Card variant="outlined" sx={{ minWidth: 1000, maxWidth: 1000 }}> */}
 
-          <Typography
+<Stack spacing={10} 
+sx={{
+  width: "80%",
+    justifyContent: "center", // Center items vertically
+    margin: "0 auto", // Center the Stack itself horizontally
+}}>
+<Typography
             component="h1"
             variant="h4"
-            sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
+             sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 3.15rem)", fontWeight: "bold", textAlign: "center" }}
           >
-            AI Seed NFT Generator
+            Linea Voters
           </Typography>
 
-          {base64Image !== '' && (
+
+
+          <PromptForm
+        sendPrompt={handleSubmit}
+        prompt={prompt}
+        setPrompt={setPrompt}
+      />
+</Stack>
+          
+{base64Image !== '' && (
             <GeneratedModal base64Image={base64Image}
               onSetMint={onSetQunatity}
               onSetSell={onSetSellNFT}
@@ -244,7 +254,7 @@ export default function VoteApp(props: { disableCustomTheme?: boolean }) {
           )}
 
           <LoadingModal text={loading} open={loading !== ''} />
-          <ImageGenerator onUriImageSet={handleSetImage} setLoading={setOnLoading} />
+          
           <MintResult
             name={mintResultName}
             number={mintResultQuantity}
@@ -314,6 +324,7 @@ export default function VoteApp(props: { disableCustomTheme?: boolean }) {
           </Stack>
         )} */}
       </MintContainer>
-    </AppTheme>
+      </div>
+    //{/* </AppTheme> */}
   );
 }
