@@ -20,7 +20,7 @@ import MintResult from "../Modal/MintResult/MintResult";
 import LoadingModal from "../Modal/LoadingModal/LoadingModal"
 import PromptForm from "./Promp";
 import { background } from "@coinbase/onchainkit/theme";
-
+import Collection from './Collection/Collection';
 const MintContainer = styled(Stack)(({ theme }) => ({
   height: "calc((1 - var(--template-frame-height, 0)) * 100dvh)",
   minHeight: "100%",
@@ -41,6 +41,8 @@ const MintContainer = styled(Stack)(({ theme }) => ({
   justifyContent: "flex-start", // Ensure content is aligned to the top
 }));
 
+
+
 export default function VoteApp(props: { disableCustomTheme?: boolean }) {
   const account = useAccount();
   // const { connectors, connect, status, error } = useConnect();
@@ -52,7 +54,47 @@ export default function VoteApp(props: { disableCustomTheme?: boolean }) {
 
   const [prompt, setPrompt] = useState<string>("");
 
-
+////// ------------ Votes collection scope - start
+  const sampleVotes: VoteDetailsType[] = [
+    {
+      id: 1,
+      title: "Vote on New Policy",
+      description: "Should we implement the new policy on remote work?",
+      yesCount: 120,
+      noCount: 45,
+      abstainCount: 10,
+    },
+    {
+      id: 2,
+      title: "Budget Approval",
+      description: "Approve the budget for the next fiscal year.",
+      yesCount: 200,
+      noCount: 30,
+      abstainCount: 0,
+    },
+    {
+      id: 3,
+      title: "Election of New Board Member",
+      description: "Elect a new member to the board of directors.",
+      yesCount: 150,
+      noCount: 25,
+      abstainCount: 20,
+    },
+  ];
+  type VoteDetailsType = {
+    id: number;
+    title: string;
+    description: string;
+    yesCount: number;
+    noCount: number;
+    abstainCount: number;
+  };
+  const [votes, setVotes] = useState<VoteDetailsType[]>([]);
+  const onVoteCollection = (item: VoteDetailsType) => {
+    // setSelectedItem(item);
+    // setOpenModal(true);
+  };
+////// ------------ Votes collection scope - end
 
 
 
@@ -60,6 +102,7 @@ export default function VoteApp(props: { disableCustomTheme?: boolean }) {
 
   const handleSubmit = () => {
 
+    setVotes(sampleVotes)
   }
 
 
@@ -243,6 +286,15 @@ sx={{
         setPrompt={setPrompt}
       />
 </Stack>
+
+<div style={{ width: '90%' , paddingTop: 100, display: 'flex',
+    justifyContent: "center",
+    margin: "0 auto" }}>
+ <Collection
+            items={votes}
+            onVoteItem={onVoteCollection}
+          />
+          </div>
           
 {base64Image !== '' && (
             <GeneratedModal base64Image={base64Image}
@@ -323,6 +375,8 @@ sx={{
              <DismissibleAlert type={alert.type} message={alert.message} />
           </Stack>
         )} */}
+
+
       </MintContainer>
       </div>
     //{/* </AppTheme> */}
